@@ -1,0 +1,117 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaueK Apps SSO</title>
+  <base href="/">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+      color: #f8fafc;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+    }
+    h1 { font-size: 56px; font-weight: 800; color: #ffffff; margin-bottom: 8px; }
+    h2 { font-size: 20px; font-weight: 600; color: #cbd5e1; margin-bottom: 12px; }
+    p { color: #94a3b8; font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+    .countdown {
+      font-size: 36px;
+      font-weight: 700;
+      color: #6366f1;
+      margin: 16px auto 24px;
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(99, 102, 241, 0.1);
+      border: 2px solid rgba(99, 102, 241, 0.3);
+    }
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">SSO</div>
+    <h1>404</h1>
+    <h2>Przekierowanie do aplikacji</h2>
+    <p>Za chwilę nastąpi automatyczne przekierowanie do panelu logowania...</p>
+    <div class="countdown" id="countdown">2</div>
+    <a class="button" id="button" href="./">Przejdź teraz</a>
+  </div>
+
+  <script>
+    var returnUrlParam = new URLSearchParams(window.location.search).get('returnUrl');
+    var targetUrl = './';
+    if (returnUrlParam) {
+      targetUrl = './login?returnUrl=' + encodeURIComponent(returnUrlParam);
+    }
+
+    var seconds = 2;
+    var countdownEl = document.getElementById('countdown');
+    var buttonEl = document.getElementById('button');
+    if (buttonEl) buttonEl.href = targetUrl;
+
+    var timer = setInterval(function() {
+      seconds--;
+      if (countdownEl) countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = targetUrl;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
